@@ -1,0 +1,27 @@
+{
+    "name": "dreamcoders/laravel-dingbot",
+    "description": "钉钉机器人扩展包",
+    "autoload": {
+        "psr-4": {
+            "DreamCoders\\DingBot\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "DreamCoders\\DingBot\\DingBotServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "DreamCoders",
+            "email": "1390903070@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
