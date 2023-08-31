@@ -1,6 +1,7 @@
 {
     "name": "dreamcoders/laravel-dingbot",
-    "description": "钉钉机器人扩展包",
+    "description": "a dingtalk robot message handle for send message",
+    "keywords": ["laravel","ding bot", "ding talk", "ding notice"],
     "autoload": {
         "psr-4": {
             "DreamCoders\\DingBot\\": "src/"
@@ -16,6 +17,7 @@
             ]
         }
     },
+    "license": "MIT",
     "authors": [
         {
             "name": "DreamCoders",
