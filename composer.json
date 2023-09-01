@@ -2,6 +2,10 @@
     "name": "dreamcoders/laravel-dingbot",
     "description": "a dingtalk robot message handle for send message",
     "keywords": ["laravel","ding bot", "ding talk", "ding notice"],
+    "require": {
+        "php": ">=7.0",
+        "guzzlehttp/guzzle": "^6.2|^7.0"
+    },
     "autoload": {
         "psr-4": {
             "DreamCoders\\DingBot\\": "src/"
@@ -24,6 +28,5 @@
             "email": "1390903070@qq.com"
         }
     ],
-    "minimum-stability": "dev",
-    "require": {}
+    "minimum-stability": "dev"
 }
