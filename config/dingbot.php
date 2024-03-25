@@ -1,10 +1,30 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: DreamCoders
+ * Date: 2023-08-31
+ * Time: 22:38
+ */
 
 return [
     'webhookUrl' => env('DING_ROBOT_URL', 'https://oapi.dingtalk.com/robot/send'),
-    'access_token'   => [
-        'default' => env('DING_TOKEN', '4c8ed2083bcd5ce3eb8ee9dec9d38343211900ea29ef7bbef9156ad0892'),// 默认
-        'bot1' => env('DING_TOKEN1', '你的钉钉群组机器人token'),//扩展更多token
-        'bot2' => env('DING_TOKEN2', '你的钉钉群组机器人token'),//扩展更多token
+
+    'default' => [
+        // 机器人的access_token default
+        'access_token' => env('DING_TOKEN','4c8ed2083bcd5cc9d38343211900ea29ef7bbef9156ad0892'),
+        // 加签 （不开启加签则为空）
+        'secret' => env('DING_SECRET',''),
+    ],
+    'bot1' => [
+        // 机器人的access_token  bot1
+        'access_token' => env('DING_TOKEN1',''),
+        // 加签 （不开启加签则为空）
+        'secret' => env('DING_SECRET1',''),
+    ],
+    'bot2' => [
+        // 机器人的access_token  bot2
+        'access_token' => env('DING_TOKEN2',''),
+        // 加签 （不开启加签则为空）
+        'secret' => env('DING_SECRET2',''),
     ],
 ];

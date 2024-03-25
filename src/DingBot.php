@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Created by PhpStorm.
+ * User: DreamCoders
+ * Date: 2023-08-31
+ * Time: 22:38
+ */
+
 namespace DreamCoders\DingBot;
 use DreamCoders\DingBot\Messages\Text;
 use DreamCoders\DingBot\Messages\Markdown;
@@ -21,16 +28,32 @@ class DingBot
     public function __construct($robot = 'default')
     {
         if (!$this->config = config('dingbot')) {
+
             throw new \Exception('dingbot配置文件缺失或缺少');
+
         }
 
         if ($robot != 'default') {
-            $this->access_token = $this->config['access_token'][$robot] ?? '';
+
+            $this->access_token = $this->config[$robot]['access_token'] ?? '';
+
         } else {
-            $this->access_token = $this->config['access_token']['default'];
+
+            $this->access_token = $this->config['default']['access_token'];
+
         }
 
         $this->webhookUrl = $this->config['webhookUrl'] . '?access_token=' . $this->access_token;
+
+        if (isset($this->config[$robot]['secret']) && $secret = $this->config[$robot]['secret']) {
+
+            $timestamp = time() . sprintf('%03d', rand(1, 999));
+            $sign      = hash_hmac('sha256', $timestamp . "\n" . $secret, $secret, true);
+            $query['timestamp'] = $timestamp;
+            $query['sign'] = base64_encode($sign);
+            $this->webhookUrl =  $this->webhookUrl . "&" . http_build_query($query);
+
+        }
 
         return $this;
     }

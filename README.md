@@ -1,8 +1,6 @@
 # 钉钉机器人消息发送
 
 
-
-
 # 介绍
 企业内部有较多系统支撑着公司的核心业务流程，譬如CRM系统、交易系统、监控报警系统等等。通过钉钉的自定义机器人，可以将这些系统事件同步到钉钉的聊天群。
 laravel-dingbot 是一款钉钉机器人消息推送的Laravel扩展，您可以通过此扩展简单高效的推送消息通知到钉钉，进行监控和提醒操作。
@@ -28,13 +26,26 @@ php artisan vendor:publish --provider="DreamCoders\DingBot\DingBotServiceProvide
 ```php
 return [
     'webhookUrl' => env('DING_ROBOT_URL', 'https://oapi.dingtalk.com/robot/send'),
-    'access_token'   => [
-        'default' => env('DING_TOKEN', '4c8ed2083bcd5ce3eb8eeXXXd38343211900ea29ef7bbef9156ad0892'),// 默认
-        'bot1' => env('DING_TOKEN1', '你的钉钉群组机器人token'),//扩展更多token
-        'bot2' => env('DING_TOKEN2', '你的钉钉群组机器人token'),//扩展更多token
+
+    'default' => [
+        // 机器人的access_token default
+        'access_token' => env('DING_TOKEN','4c8ed2083bcd5cc9d38343211900ea29ef7bbef9156ad0892'),
+        // 加签 （不开启加签则为空）
+        'secret' => env('DING_SECRET',''),
+    ],
+    'bot1' => [
+        // 机器人的access_token  bot1
+        'access_token' => env('DING_TOKEN1',''),
+        // 加签 （不开启加签则为空）
+        'secret' => env('DING_SECRET1',''),
+    ],
+    'bot2' => [
+        // 机器人的access_token  bot2
+        'access_token' => env('DING_TOKEN2',''),
+        // 加签 （不开启加签则为空）
+        'secret' => env('DING_SECRET2',''),
     ],
 ];
-
 ```
 
 
@@ -52,18 +63,46 @@ DING_TOKEN=you-push-token
 如果想要添加多个机器人，则在`dingbot.php`当中添加机器人名字和对应的token配置即可
 
 ```php
- 'access_token'   => [
-        'default' => env('DING_TOKEN', '4c8ed2083bcd5ce3eb8eeXXXd38343211900ea29ef7bbef9156ad0892'),// 默认
-        'bot1' => env('DING_TOKEN1', '你的钉钉群组机器人token'),//扩展更多token
-        'bot2' => env('DING_TOKEN2', '你的钉钉群组机器人token'),//扩展更多token
+    'default' => [
+        // 机器人的access_token default
+        'access_token' => env('DING_TOKEN','4c8ed2083bcd5cc9d38343211900ea29ef7bbef9156ad0892'),
+        // 加签 （不开启加签则留空）
+        'secret' => env('DING_SECRET',''),
+    ],
+    'bot1' => [
+        // 机器人的access_token  bot1
+        'access_token' => env('DING_TOKEN1',''),
+        // 加签 （不开启加签则留空）
+        'secret' => env('DING_SECRET1',''),
+    ],
+    'bot2' => [
+        // 机器人的access_token  bot2
+        'access_token' => env('DING_TOKEN2',''),
+        // 加签 （不开启加签则留空）
+        'secret' => env('DING_SECRET2',''),
     ]
 ```
 
 .env配置
 ```php
+DING_TOKEN=you-push-token
 DING_TOKEN1=you-push-token
-DING_TOKEN2=you-push-token
 ```
+
+# 安全配置
+### 自定义关键词
+最多可以设置10个关键词，消息中至少包含其中1个关键词才可以发送成功。
+例如添加了一个自定义关键词：监控报警，则这个机器人所发送的消息，必须包含监控报警这个词，才能发送成功。
+
+### 加签
+钉钉创建机器人时选择加签，将`secret`复制到对应配置文件中即可，如果开启加签方式，则必须填写`secret`,否则留空即可
+```php
+DING_SECRET=you-bot-secret
+DING_SECRET1=you-bot-secret
+DING_SECRET2=you-bot-secret
+```
+### IP地址（段）
+设定后，只有来自IP地址范围内的请求才会被正常处理。支持两种设置方式：IP地址和IP地址段，暂不支持IPv6地址白名单
 
 
 # 使用示例
@@ -200,6 +239,5 @@ enjoy :)
 
 - 效果
 ![file](https://lccdn.phphub.org/uploads/images/201805/23/6932/q3nLCOPbRj.png?imageView2/2/w/1240/h/0)
-
 
 
