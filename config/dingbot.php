@@ -5,7 +5,7 @@
  * Date: 2023-08-31
  * Time: 22:38
  */
-
+//钉钉机器人配置文件
 return [
     'webhookUrl' => env('DING_ROBOT_URL', 'https://oapi.dingtalk.com/robot/send'),
 
